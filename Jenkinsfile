@@ -3,17 +3,22 @@ pipeline {
   agent any
   
   stages {
+    
+    stage("Clone Source") {
+      steps {
+        sh "git clone https://github.com/bananasgroup/sqlbackgres.git"
+      }
+    }
     stage("build") {
       steps {
-        cd "build/pgbackrest-release-2.36/src"
-        ./configure
-        make
+        sh "cd build/pgbackrest-release-2.36/src && ./configure && make"
       }
     }
     stage("deploy") {
       steps {
-        cp build/pgbackrest-release-2.36/src/pgbackrest /usr/bin
+        sh "cp build/pgbackrest-release-2.36/src/pgbackrest /usr/bin"
       }
     }
+    
   }
 }
