@@ -4,14 +4,14 @@ pipeline {
   
   stages {
     stage("build") {
-      step {
+      steps {
         cd "build/pgbackrest-release-2.36/src"
         ./configure
         make
       }
     }
     stage("deploy") {
-      step {
+      steps {
         cp build/pgbackrest-release-2.36/src/pgbackrest /usr/bin
       }
     }
