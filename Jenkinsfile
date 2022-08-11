@@ -11,12 +11,12 @@ pipeline {
     }
     stage("build") {
       steps {
-        sh "cd src/build/pgbackrest-release-2.36/src && ./configure && make"
+        sh "cd src/build/ && ./configure && make"
       }
     }
     stage("deploy") {
       steps {
-        sh "cp src/build/pgbackrest-release-2.36/src/pgbackrest /usr/bin"
+        sh "cp src/pgbackrest /usr/bin"
       }
     }
     
