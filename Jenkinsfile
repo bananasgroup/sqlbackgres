@@ -2,6 +2,10 @@ pipeline {
   
   agent any
   
+  triggers {
+    pollSCM {'* * * * *'}
+  } //end triggers
+  
   stages {
     
     stage("Clone Source") {
@@ -10,7 +14,8 @@ pipeline {
         sh "git clone https://github.com/bananasgroup/sqlbackgres.git"
         sh "mv sqlbackgres build"
       }
-    }
+    } //end stage clone source
+    
     stage("build") {
       steps {
         dir("build/src/") {
@@ -19,12 +24,22 @@ pipeline {
           sh "make"
         }
       }
-    }
+    } //end stage build
+    
     stage("deploy") {
       steps {
         sh "cp sqlbackgres/src/pgbackrest /usr/bin"
       }
-    }
+    } //end stage deploy
     
-  }
-}
+  } //end stages
+  
+  post {
+    success {
+      echo "All done!"
+    }
+    failure {
+      echo "Build stop with failure."
+    }
+  } //end post
+} //end pipline
