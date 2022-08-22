@@ -6,6 +6,10 @@ pipeline {
     
     stage("Clone Source") {
       steps {
+        sh "CURRENT=pwd"
+        echo $CURRENT
+        sh "pwd"
+        sh "rm -r /var/lib/jenkins/workspace/pgbackrest_pipeline_main"
         sh "git clone https://github.com/bananasgroup/sqlbackgres.git"
       }
     }
