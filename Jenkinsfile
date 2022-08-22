@@ -8,11 +8,12 @@ pipeline {
       steps {
         sh "rm -r /var/lib/jenkins/workspace/pgbackrest_pipeline_main/*"
         sh "git clone https://github.com/bananasgroup/sqlbackgres.git"
+        sh "mv sqlbackgres build"
       }
     }
     stage("build") {
       steps {
-        dir("sqlbackgres/src/") {
+        dir("build/src/") {
           sh "chmod +x configure"
           sh "./configure"
           sh "make"
