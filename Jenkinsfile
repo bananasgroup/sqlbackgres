@@ -2,9 +2,7 @@ pipeline {
   
   agent any
   
-  triggers {
-    pollSCM ''
-  } //end triggers
+  properties([pipelineTriggers([githubPush()])])
   
   stages {
     stage('Source checkout') {
@@ -12,7 +10,7 @@ pipeline {
             checkout(
                 [
                     $class: 'GitSCM',
-                    branches: [],
+                    branches: [[name: 'main']],
                     browser: [],
                     doGenerateSubmoduleConfigurations: false,
                     extensions: [],
