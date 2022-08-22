@@ -2,7 +2,7 @@ pipeline {
   
   agent any
   
-  trigger {pollSCM 'H/10 * * * *'}
+  triggers {pollSCM 'H/10 * * * *'}
   
   stages {
     stage('Source checkout') {
