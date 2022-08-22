@@ -14,7 +14,7 @@ pipeline {
       steps {
         sh "chmod +x sqlbackgres/src/configure"
         sh "sqlbackgres/src/configure"
-        sh "make --directory=sqlbackgres/src/"
+        sh "make"
       }
     }
     stage("deploy") {
