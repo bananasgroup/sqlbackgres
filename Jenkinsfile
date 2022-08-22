@@ -12,9 +12,11 @@ pipeline {
     }
     stage("build") {
       steps {
-        sh "chmod +x sqlbackgres/src/configure"
-        sh "sqlbackgres/src/configure"
-        sh "make"
+        dir("sqlbackgres/src/") {
+          sh "chmod +x configure"
+          sh "./configure"
+          sh "make"
+        }
       }
     }
     stage("deploy") {
