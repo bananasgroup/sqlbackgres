@@ -11,7 +11,9 @@ pipeline {
     }
     stage("build") {
       steps {
-        sh "cd src/build/ && ./configure && make"
+        sh "CURRENT=pwd"
+        echo $CURRENT
+        #sh "cd src/build/ && src/build/configure && make"
       }
     }
     stage("deploy") {
