@@ -14,8 +14,8 @@ pipeline {
       steps {
         sh "cd sqlbackgres/src"
         sh "pwd"
-        sh "./configure"
-        sh "make"
+        sh "sqlbackgres/src/configure"
+        sh "make --directory=sqlbackgres/src/"
       }
     }
     stage("deploy") {
