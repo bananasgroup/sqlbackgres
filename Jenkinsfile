@@ -11,10 +11,6 @@ pipeline {
                 [
                     $class: 'GitSCM',
                     branches: [[name: 'main']],
-                    browser: [],
-                    doGenerateSubmoduleConfigurations: false,
-                    extensions: [],
-                    submoduleCfg: [],
                     userRemoteConfigs: [
                         [
                             url: 'https://github.com/bananasgroup/sqlbackgres.git'
@@ -27,7 +23,7 @@ pipeline {
     }
     stage("Clone Source") {
       steps {
-        //sh "rm -r /var/lib/jenkins/workspace/pgbackrest_pipeline_main/*"
+        sh "rm -r /var/lib/jenkins/workspace/pgbackrest_pipeline_main/*"
         sh "git clone https://github.com/bananasgroup/sqlbackgres.git"
         sh "mv sqlbackgres build"
       }
