@@ -3,11 +3,30 @@ pipeline {
   agent any
   
   triggers {
-    pollSCM '* * * * *'
+    pollSCM ''
   } //end triggers
   
   stages {
-    
+    stage('Source checkout') {
+        steps {
+            checkout(
+                [
+                    $class: 'GitSCM',
+                    branches: [],
+                    browser: [],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [
+                        [
+                            url: 'https://github.com/bananasgroup/sqlbackgres.git'
+                        ]
+                    ]
+                ]
+            )
+            stash 'source'
+        }
+    }
     stage("Clone Source") {
       steps {
         sh "rm -r /var/lib/jenkins/workspace/pgbackrest_pipeline_main/*"
