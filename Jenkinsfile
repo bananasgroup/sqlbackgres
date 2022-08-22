@@ -52,7 +52,7 @@ pipeline {
       echo "All done!"
     }
     failure {
-      echo "Build stop with failure."
+      echo "ERROR: Build stop with failure."
     }
     always {
       deleteDir() //cleanup workspace
