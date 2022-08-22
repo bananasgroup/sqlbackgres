@@ -2,7 +2,7 @@ pipeline {
   
   agent any
   
-  properties([pipelineTriggers([githubPush()])])
+  options([pipelineTriggers([githubPush()])])
   
   stages {
     stage('Source checkout') {
