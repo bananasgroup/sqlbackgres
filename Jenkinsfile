@@ -2,7 +2,7 @@ pipeline {
   
   agent any
   
-  options([pipelineTriggers([githubPush()])])
+  trigger {pollSCM 'H/10 * * * *'}
   
   stages {
     stage('Source checkout') {
@@ -27,7 +27,7 @@ pipeline {
     }
     stage("Clone Source") {
       steps {
-        sh "rm -r /var/lib/jenkins/workspace/pgbackrest_pipeline_main/*"
+        //sh "rm -r /var/lib/jenkins/workspace/pgbackrest_pipeline_main/*"
         sh "git clone https://github.com/bananasgroup/sqlbackgres.git"
         sh "mv sqlbackgres build"
       }
@@ -57,6 +57,9 @@ pipeline {
     }
     failure {
       echo "Build stop with failure."
+    }
+    always {
+      deleteDir() //cleanup workspace
     }
   } //end post
 } //end pipline
